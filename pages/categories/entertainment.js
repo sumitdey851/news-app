@@ -9,6 +9,13 @@ export const getStaticProps = async () => {
   );
   const data = await res.json();
 
+  // render 404 if no data fetched
+  if(data.artcles.length === 0) {
+    return {
+      notFound: true
+    };
+  }
+
   return {
     props: { headlines: data.articles },
     revalidate: 3600
